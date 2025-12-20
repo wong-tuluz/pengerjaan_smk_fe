@@ -13,6 +13,7 @@
                         <span class="sr-only">SMK PAKEM</span>
                     </a>
                 </div>
+              <div class="text-destructive text-center">Hello Gais</div>
               <div class="grid gap-6">
                 <!-- Username -->
                 <div class="grid gap-2">
