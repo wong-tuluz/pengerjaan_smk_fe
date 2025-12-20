@@ -152,6 +152,11 @@ const navMain = computed<NavItem[]>(() => [
     icon: LayoutDashboard,
   },
   {
+    title: "Pembayaran",
+    url: "/pembayaran",
+    icon: LayoutDashboard,
+  },
+  {
     title: "Data Master",
     url: "#",
     icon: Database,

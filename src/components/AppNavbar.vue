@@ -73,7 +73,7 @@ const username = computed(() => "John Doe")
 const email = computed(() => "user@example.com")
 
 function getUserInitials(): string {
-  const names = username.value.split(" ")
+  const names:any = username.value.split(" ")
   if (names.length >= 2) {
     return (names[0][0] + names[1][0]).toUpperCase()
   }
