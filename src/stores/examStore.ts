@@ -168,21 +168,52 @@ export const useExamStore = defineStore('exam', () => {
     }
   }
 
-  // Select answer method
+  // Select answer method - UPDATED untuk handle single & multiple
   const selectAnswer = (optionId: string) => {
     if (!session.value || !currentQuestion.value) return
     
     const question = session.value.questions[currentQuestionIndex.value]
     if (!question) return // Type safety check
     
-    question.selectedAnswer = optionId
-    question.isAnswered = true
+    if (question.type === 'single') {
+      // Single choice - ganti jawaban
+      question.selectedAnswer = optionId
+      question.isAnswered = true
+    } else if (question.type === 'multiple') {
+      // Multiple choice - toggle checkbox
+      if (!question.selectedAnswers) {
+        question.selectedAnswers = []
+      }
+      
+      const index = question.selectedAnswers.indexOf(optionId)
+      if (index > -1) {
+        // Sudah dipilih, hapus
+        question.selectedAnswers.splice(index, 1)
+      } else {
+        // Belum dipilih, tambah
+        question.selectedAnswers.push(optionId)
+      }
+      
+      // Set isAnswered jika minimal 1 dipilih
+      question.isAnswered = question.selectedAnswers.length > 0
+    }
     
     // Update answered count
     session.value.answeredCount = session.value.questions.filter(q => q.isAnswered).length
     
     // Auto save
     autoSave()
+  }
+
+  // Helper: Check if option is selected
+  const isOptionSelected = (optionId: string): boolean => {
+    if (!currentQuestion.value) return false
+    
+    if (currentQuestion.value.type === 'single') {
+      return currentQuestion.value.selectedAnswer === optionId
+    } else {
+      return currentQuestion.value.selectedAnswers?.includes(optionId) || false
+    }
   }
 
   // Navigation methods
@@ -253,7 +284,7 @@ export const useExamStore = defineStore('exam', () => {
     }, 1000)
   }
 
-  // Submit exam
+  // Submit exam - UPDATED untuk handle kedua tipe
   const submitExam = async () => {
     if (!session.value || session.value.submitted) return { success: false }
     
@@ -272,12 +303,24 @@ export const useExamStore = defineStore('exam', () => {
       const payload: SubmitExamPayload = {
         examId: session.value.id,
         answers: session.value.questions
-          .filter(q => q.selectedAnswer)
-          .map(q => ({
-            questionId: q.id,
-            selectedAnswer: q.selectedAnswer!,
-            answeredAt: new Date().toISOString()
-          })),
+          .filter(q => q.isAnswered)
+          .map(q => {
+            if (q.type === 'single') {
+              return {
+                questionId: q.id,
+                type: 'single',
+                selectedAnswer: q.selectedAnswer!,
+                answeredAt: new Date().toISOString()
+              }
+            } else {
+              return {
+                questionId: q.id,
+                type: 'multiple',
+                selectedAnswers: q.selectedAnswers!,
+                answeredAt: new Date().toISOString()
+              }
+            }
+          }),
         totalTimeSpent: timeSpent
       }
       
@@ -357,6 +400,7 @@ export const useExamStore = defineStore('exam', () => {
     // Actions
     initializeExam,
     selectAnswer,
+    isOptionSelected,
     goToPreviousQuestion,
     goToNextQuestion,
     goToQuestion,

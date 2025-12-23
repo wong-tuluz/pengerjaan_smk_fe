@@ -2,12 +2,14 @@ import { createRouter, createWebHistory } from "vue-router"
 import Login from "@/pages/Login.vue"
 import Dashboard from "@/pages/Dashboard/Dashboard.vue"
 import ExamPage from "@/pages/Exam/ExamPage.vue"
+import BlankPage from "@/pages/BlankPage.vue"
 
 const routes = [
   { path: "/", redirect: "/login" },
   { path: "/login", component: Login, meta: { layout: "auth", title: "Login – SMK PAKEM" } },
   { path: "/dashboard", component: Dashboard , meta: { layout: "app", requiresAuth: true, title: "Dashboard – SMK PAKEM" } },
-  { path: "/exam/:id", component: ExamPage , meta: { layout: "auth", requiresAuth: true, title: "Dashboard – SMK PAKEM" } },
+  { path: "/exam/:id", component: ExamPage , meta: { layout: "auth", requiresAuth: true, title: "Exam – SMK PAKEM" } },
+  { path: "/blank", component: BlankPage , meta: { layout: "app", requiresAuth: true, title: "Blank – SMK PAKEM" } },
 ]
 
 export const router = createRouter({

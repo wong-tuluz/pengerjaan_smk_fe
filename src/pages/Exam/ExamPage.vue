@@ -93,14 +93,29 @@
                 </span>
                 <span class="flex-1 text-card-foreground">{{ option.text }}</span>
                 <div class="text-primary">
-                  <CircleIcon 
-                    v-if="!isSelected(option.id)" 
-                    class="w-5 h-5 text-muted-foreground/30" 
-                  />
-                  <CircleCheckIcon 
-                    v-else 
-                    class="w-5 h-5 text-primary" 
-                  />
+                  <!-- Single Choice: Radio Icon -->
+                  <template v-if="examStore.currentQuestion.type === 'single'">
+                    <CircleIcon 
+                      v-if="!isSelected(option.id)" 
+                      class="w-5 h-5 text-muted-foreground/30" 
+                    />
+                    <CircleDotIcon 
+                      v-else 
+                      class="w-5 h-5 text-primary" 
+                    />
+                  </template>
+                  
+                  <!-- Multiple Choice: Checkbox Icon -->
+                  <template v-else>
+                    <SquareIcon 
+                      v-if="!isSelected(option.id)" 
+                      class="w-5 h-5 text-muted-foreground/30" 
+                    />
+                    <CheckSquareIcon 
+                      v-else 
+                      class="w-5 h-5 text-primary" 
+                    />
+                  </template>
                 </div>
               </button>
             </div>
@@ -232,7 +247,9 @@ import {
   CloudIcon, 
   ClockIcon,
   CircleIcon,
-  CircleCheckIcon,
+  CircleDotIcon,
+  SquareIcon,
+  CheckSquareIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
   SendIcon
@@ -258,7 +275,7 @@ const examStore = useExamStore()
 
 // Computed helpers
 const isSelected = (optionId: string) => {
-  return examStore.currentQuestion?.selectedAnswer === optionId
+  return examStore.isOptionSelected(optionId)
 }
 
 const getOptionClasses = (optionId: string) => {

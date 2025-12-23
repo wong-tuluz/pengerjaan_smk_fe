@@ -177,9 +177,9 @@ const navMain = computed<NavItem[]>(() => [
     url: "#",
     icon: ClipboardList,
     items: [
-      { title: "Daftar Ujian", url: "/exams", icon: FileText },
-      { title: "Riwayat Ujian", url: "/exam-history", icon: Calendar },
-      { title: "Hasil Ujian", url: "/exam-results", icon: FileText }
+      { title: "Daftar Ujian", url: "/blank", icon: FileText },
+      { title: "Riwayat Ujian", url: "/#", icon: Calendar },
+      { title: "Hasil Ujian", url: "/#", icon: FileText }
     ],
   },
   {
@@ -187,14 +187,14 @@ const navMain = computed<NavItem[]>(() => [
     url: "#",
     icon: Database,
     items: [
-      { title: "Data Siswa", url: "/students", icon: Users },
-      { title: "Data Kelas", url: "/classes", icon: Building },
-      { title: "Data Mata Pelajaran", url: "/subjects", icon: FileText }
+      { title: "Data Siswa", url: "/#", icon: Users },
+      { title: "Data Kelas", url: "/#", icon: Building },
+      { title: "Data Mata Pelajaran", url: "/#", icon: FileText }
     ],
   },
   {
     title: "Pengaturan",
-    url: "/settings",
+    url: "/setting#",
     icon: Settings,
   }
 ])

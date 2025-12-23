@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main class="p-4">
     <!-- Loading State -->
     <div v-if="loading" class="text-center py-12">
       <div class="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>

@@ -2,14 +2,16 @@ export interface Question {
   id: number;
   number: number;
   text: string;
+  type: 'single' | 'multiple'; // single = pilihan ganda, multiple = checkbox
   options: Option[];
-  selectedAnswer?: string;
+  selectedAnswer?: string; // untuk single choice (e.g., "A")
+  selectedAnswers?: string[]; // untuk multiple choice (e.g., ["A", "C"])
   isAnswered: boolean;
   isMarked?: boolean;
 }
 
 export interface Option {
-  id: string; // 'A', 'B', 'C', 'D'
+  id: string; // 'A', 'B', 'C', 'D', 'E'
   text: string;
 }
 
@@ -36,7 +38,9 @@ export interface SubmitExamPayload {
   examId: number;
   answers: Array<{
     questionId: number;
-    selectedAnswer: string;
+    type: 'single' | 'multiple';
+    selectedAnswer?: string; // untuk single choice
+    selectedAnswers?: string[]; // untuk multiple choice
     answeredAt: string;
   }>;
   totalTimeSpent: number;
