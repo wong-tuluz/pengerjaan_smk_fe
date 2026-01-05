@@ -117,7 +117,7 @@
               Hubungi Bagian Pusat
             </span>
             <div class="mt-2 text-[11px] text-muted-foreground/70">
-              © 2024 Pengerjaan App. Sistem Ujian Online.
+              © 2025 Pengerjaan App. Sistem Ujian Online.
             </div>
           </div>
           <!-- dumm account -->

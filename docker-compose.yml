@@ -9,3 +9,7 @@ services:
     restart: always
     ports:
       - "8880:8880"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npm run dev -- --host
