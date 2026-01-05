@@ -6,7 +6,7 @@
           <div class="w-6 h-6 rounded-full bg-gradient-to-r from-primary to-primary/60"></div>
         </div>
         <div class="flex flex-col">
-          <span class="font-semibold text-sm text-sidebar-foreground">Pengerjaan App</span>
+          <span class="font-semibold text-sm text-sidebar-foreground">Learning Management System</span>
           <span class="text-xs text-muted-foreground">v1.0.0</span>
         </div>
       </div>

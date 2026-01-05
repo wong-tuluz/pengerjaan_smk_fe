@@ -16,8 +16,8 @@
                       </div>
                     </div>
                     <div>
-                      <h1 class="text-2xl font-bold text-card-foreground mb-1">Pengerjaan App</h1>
-                      <p class="text-sm text-muted-foreground">Sistem Ujian Online</p>
+                      <h1 class="text-2xl font-bold text-card-foreground mb-1">SMK MUHAMMADIYAH PAKEM</h1>
+                      <p class="text-sm text-muted-foreground">Learning Management System</p>
                     </div>
                 </div>
               
